@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog Posts</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans">
+  <div class="max-w-4xl mx-auto py-8">
+    <h1 class="text-4xl font-bold mb-6">Blog Posts</h1>
+    {% for post in posts %}
+      <div class="mb-6 p-4 bg-white shadow rounded">
+        <h2 class="text-2xl font-semibold">
+          <a href="{% url 'post_detail' post.pk %}" class="text-blue-600 hover:underline">
+            {{ post.title }}
+          </a>
+        </h2>
+        <p class="text-sm text-gray-500">By {{ post.author }} on {{ post.published_date }}</p>
+        <p class="mt-2">{{ post.content|truncatewords:30 }}</p>
+      </div>
+    {% empty %}
+      <p>No posts yet.</p>
+    {% endfor %}
+  </div>
+</body>
+</html>
